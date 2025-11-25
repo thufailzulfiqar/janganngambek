@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const YES_COLOR = "#4ade80";
 const NO_COLOR = "#ef4444";
-const MAX_CLICKS_MOBILE = 5;
+const MAX_CLICKS_MOBILE = 4;
 const MAX_CLICKS_DESKTOP = 8;
 const NO_TEXT_SEQUENCE = [
   "NO",
