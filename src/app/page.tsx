@@ -39,11 +39,14 @@ export default function Home() {
     }
     function handleResize() {
       setWindowWidth(window.innerWidth);
-      setYesSize(getInitialYesSize());
+      if (!isMax) {
+        setYesSize(getInitialYesSize());
+      }
+      // Jika isMax, biarkan ukuran tetap besar
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMax]);
 
   useEffect(() => {
     if (isMax) {
