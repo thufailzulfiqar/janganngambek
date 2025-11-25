@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const YES_COLOR = "#4ade80";
 const NO_COLOR = "#ef4444";
-const MAX_CLICKS_MOBILE = 6;
+const MAX_CLICKS_MOBILE = 5;
 const MAX_CLICKS_DESKTOP = 8;
 const NO_TEXT_SEQUENCE = [
   "NO",
@@ -134,6 +134,10 @@ export default function Home() {
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
+                marginLeft: isMobile ? 16 : 0,   // margin kiri di mobile
+                marginRight: isMobile ? 16 : 0,  // margin kanan di mobile
+                paddingLeft: isMobile ? 16 : 0,  // padding kiri di mobile
+                paddingRight: isMobile ? 16 : 0, // padding kanan di mobile
               }}
               className="rounded-lg font-bold"
               onClick={handleYes}
