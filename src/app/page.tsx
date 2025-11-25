@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 
 const YES_COLOR = "#4ade80";
 const NO_COLOR = "#ef4444";
-const MAX_CLICKS = 8;
+const MAX_CLICKS_MOBILE = 6;
+const MAX_CLICKS_DESKTOP = 8;
 const NO_TEXT_SEQUENCE = [
   "NO",
   "Are you sure?",
@@ -39,14 +40,11 @@ export default function Home() {
     }
     function handleResize() {
       setWindowWidth(window.innerWidth);
-      if (!isMax) {
-        setYesSize(getInitialYesSize());
-      }
-      // Jika isMax, biarkan ukuran tetap besar
+      setYesSize(getInitialYesSize());
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isMax]);
+  }, []);
 
   useEffect(() => {
     if (isMax) {
@@ -68,19 +66,20 @@ export default function Home() {
       if (newClickCount >= MAX_CLICKS) {
         setIsMax(true);
       } else {
-        const baseWidth = window.innerWidth < 600 ? 80 : 120;
-        const baseHeight = window.innerWidth < 600 ? 40 : 56;
+        const baseWidth = isMobile ? 80 : 120;
+        const baseHeight = isMobile ? 40 : 56;
         const nextHeight = yesSize.height + (window.innerHeight - baseHeight) / MAX_CLICKS;
         setYesSize({
           width: yesSize.width + (window.innerWidth - baseWidth) / MAX_CLICKS,
           height: nextHeight,
-          fontSize: `${nextHeight / (window.innerWidth < 600 ? 4 : 2.5)}px`,
+          fontSize: `${nextHeight / (isMobile ? 4 : 2.5)}px`,
         });
       }
     }
   };
 
   const isMobile = windowWidth < 600;
+  const MAX_CLICKS = isMobile ? MAX_CLICKS_MOBILE : MAX_CLICKS_DESKTOP;
 
   if (answeredYes) {
     return (
@@ -90,7 +89,7 @@ export default function Home() {
       >
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-2xl md:text-4xl font-bold text-center text-pink-600">
-            Knew you would say yes ❤️ 
+            Knew you would say yes ❤️
           </h1>
           <img
             src="/cat2.gif"
